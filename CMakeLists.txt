@@ -26,8 +26,7 @@ add_subdirectory(${CEF_LIBCEF_DLL_WRAPPER_PATH} libcef_dll_wrapper)
 set(CEFSIMPLE_SRCS
         src/main.cpp
         src/simple_handler.cc
-        src/simple_app.cc
-        )
+        src/simple_app.cc)
 set(CEFSIMPLE_SRCS_LINUX
         cefsimple_linux.cc
         simple_handler_linux.cc

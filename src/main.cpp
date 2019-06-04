@@ -56,6 +56,7 @@ int main(int argc, char** argv) {
 
     // Specify CEF global settings here.
     CefSettings settings;
+    settings.windowless_rendering_enabled = true;
 
     // SimpleApp implements application-level callbacks for the browser process.
     // It will create the first browser instance in OnContextInitialized() after

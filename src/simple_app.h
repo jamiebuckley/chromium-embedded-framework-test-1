@@ -5,10 +5,12 @@
 #ifndef CEF_TESTS_CEFSIMPLE_SIMPLE_APP_H_
 #define CEF_TESTS_CEFSIMPLE_SIMPLE_APP_H_
 
+#include <include/cef_render_handler.h>
+#include <include/cef_life_span_handler.h>
 #include "include/cef_app.h"
 
 // Implement application-level callbacks for the browser process.
-class SimpleApp : public CefApp, public CefBrowserProcessHandler {
+class SimpleApp : public CefApp, public CefBrowserProcessHandler, public CefLifeSpanHandler {
  public:
   SimpleApp();
 
@@ -17,6 +19,9 @@ class SimpleApp : public CefApp, public CefBrowserProcessHandler {
       OVERRIDE {
     return this;
   }
+
+
+
 
   // CefBrowserProcessHandler methods:
   virtual void OnContextInitialized() OVERRIDE;

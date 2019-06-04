@@ -13,6 +13,7 @@
 #include "include/views/cef_window.h"
 #include "include/wrapper/cef_closure_task.h"
 #include "include/wrapper/cef_helpers.h"
+#include <iostream>
 
 namespace {
 
@@ -129,4 +130,14 @@ void SimpleHandler::CloseAllBrowsers(bool force_close) {
   BrowserList::const_iterator it = browser_list_.begin();
   for (; it != browser_list_.end(); ++it)
     (*it)->GetHost()->CloseBrowser(force_close);
+}
+
+void SimpleHandler::OnPaint(CefRefPtr<CefBrowser> browser, CefRenderHandler::PaintElementType type,
+                            const CefRenderHandler::RectList &dirtyRects, const void *buffer, int width, int height) {
+    std::cout << "This would normally paint." << std::endl;
+}
+
+void SimpleHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect) {
+  std::cout << "This would normally return a rectangle." << std::endl;
+  rect.Set(0, 0, 800, 600);
 }

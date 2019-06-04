@@ -12,7 +12,8 @@
 class SimpleHandler : public CefClient,
                       public CefDisplayHandler,
                       public CefLifeSpanHandler,
-                      public CefLoadHandler {
+                      public CefLoadHandler,
+                      public CefRenderHandler {
  public:
   explicit SimpleHandler(bool use_views);
   ~SimpleHandler();
@@ -29,7 +30,9 @@ class SimpleHandler : public CefClient,
   }
   virtual CefRefPtr<CefLoadHandler> GetLoadHandler() OVERRIDE { return this; }
 
-  // CefDisplayHandler methods:
+  virtual CefRefPtr<CefRenderHandler> GetRenderHandler() override { return this; }
+
+    // CefDisplayHandler methods:
   virtual void OnTitleChange(CefRefPtr<CefBrowser> browser,
                              const CefString& title) OVERRIDE;
 
@@ -45,7 +48,13 @@ class SimpleHandler : public CefClient,
                            const CefString& errorText,
                            const CefString& failedUrl) OVERRIDE;
 
-  // Request that all existing browser windows close.
+  // CefRenderHandler methods:
+  virtual void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer,
+                 int width, int height) override;
+
+  virtual void GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect) override;
+
+    // Request that all existing browser windows close.
   void CloseAllBrowsers(bool force_close);
 
   bool IsClosing() const { return is_closing_; }
